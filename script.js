@@ -33,7 +33,7 @@ const UpdateUI = (name, temperature, humidity, wind, img) => {
 const fetchWheatherDetails = async (cityName) => {
     try {
         const response = await fetch(
-            `http://api.weatherapi.com/v1/current.json?key=5e790bf48b9d486d99b171939250204&q=${cityName}&aqi=no`
+            `https://api.weatherapi.com/v1/current.json?key=5e790bf48b9d486d99b171939250204&q=${cityName}&aqi=no`
         );
         const result = await response.json();
 
@@ -62,7 +62,7 @@ const fetchWheatherDetails = async (cityName) => {
 const fetchWheatherForecast = async (cityName) => {
     try {
         const response = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=5e790bf48b9d486d99b171939250204&q=${cityName}&days=6&aqi=no&alerts=no`
+            `https://api.weatherapi.com/v1/forecast.json?key=5e790bf48b9d486d99b171939250204&q=${cityName}&days=6&aqi=no&alerts=no`
         );
         const result = await response.json();
 
