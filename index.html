@@ -24,11 +24,15 @@
                     class="form-container bg-gray-700 md:h-full w-full rounded-2xl shadow-md p-4 md:overflow-y-auto overflow-x-hidden">
                     <span id="error-elem" class="w-full text-white bg-red-400 p-4 rounded-md hidden"></span>
                     <form id="form" class="w-full flex flex-col gap-4 mt-4" action="">
-                        <fieldset class="flex flex-col gap-2 items-start">
-                            <label for="name">Enter City</label>
-                            <input required class="w-full h-12 p-2 border rounded-sm"
-                                placeholder="Ex. Delhi, Mumbai, Vadodara" type="text" name="name" pattern="[A-Za-z\s]+"
-                                id="name" />
+                        <fieldset class="flex flex-col gap-2 items-start relative">
+                            <label for="input-search">Enter City</label>
+                            <input id="input-search" autocomplete="off" required
+                                class="w-full h-12 p-2 border rounded-sm" placeholder="Ex. Delhi, Mumbai, Vadodara"
+                                type="text" name="name" pattern="[A-Za-z\s]+" id="name" />
+                            <div id="recent-searches"
+                                class="recent-searches absolute bg-gray-800 p-4 w-full min-h-12 top-24 left-0 z-50 flex-col gap-4 hidden">
+                                <!-- <span class="w-full h-fit inline-block p-2 border-b">text</span> -->
+                            </div>
                         </fieldset>
                         <button class="btn-primary">
                             Search

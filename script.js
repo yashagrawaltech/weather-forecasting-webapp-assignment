@@ -6,8 +6,12 @@ const imgElement = document.querySelector("#image");
 const dateElement = document.querySelector("#date");
 const cardsContainer = document.querySelector(".cards");
 const form = document.querySelector("#form");
+const inputElem = document.querySelector("#input-search");
+const recentSearchesContainer = document.querySelector("#recent-searches");
 const useLocationBtn = document.querySelector("#use-location-btn");
 const errorElement = document.querySelector("#error-elem");
+
+let recentSearches = JSON.parse(localStorage.getItem("recent-searches")) || [];
 
 const setErrorMessage = (message) => {
     errorElement.classList.remove("hidden");
@@ -109,6 +113,18 @@ form.addEventListener("submit", (e) => {
     const cityName = formData.get("name");
     if (!cityName) return;
 
+    const set = new Set([...recentSearches, cityName]);
+
+    localStorage.setItem("recent-searches", JSON.stringify(Array.from(set)));
+    recentSearches = Array.from(set);
+    if (recentSearches.length > 5) {
+        recentSearches = recentSearches.slice(-5);
+        localStorage.setItem("recent-searches", JSON.stringify(recentSearches));
+    }
+
+    inputElem.value = "";
+    inputElem.blur();
+
     fetchWheatherDetails(cityName);
     fetchWheatherForecast(cityName);
 });
@@ -133,5 +149,46 @@ useLocationBtn.addEventListener("click", () => {
 
     function error() {
         setErrorMessage("Unable to retrieve your location.");
+    }
+});
+
+inputElem.addEventListener("focus", () => {
+    recentSearchesContainer.classList.add("flex");
+    recentSearchesContainer.classList.remove("hidden");
+
+    recentSearchesContainer.innerHTML = "";
+
+    recentSearches.forEach((s, idx) => {
+        const el = document.createElement("span");
+        el.className = "w-full h-fit inline-block p-2 border-b";
+        el.setAttribute("data-index", idx);
+        el.setAttribute("id", "suggesstion");
+        el.textContent = s;
+
+        recentSearchesContainer.appendChild(el);
+    });
+});
+
+recentSearchesContainer.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (
+        e.target ===
+        document.querySelector(
+            `#suggesstion[data-index="${e.target.getAttribute("data-index")}"]`
+        )
+    ) {
+        inputElem.value = e.target.textContent;
+        inputElem.focus();
+        recentSearchesContainer.classList.add("hidden");
+        recentSearchesContainer.classList.remove("flex");
+    }
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target !== recentSearchesContainer && e.target !== inputElem) {
+        if (recentSearchesContainer.classList.contains("flex")) {
+            recentSearchesContainer.classList.add("hidden");
+            recentSearchesContainer.classList.remove("flex");
+        }
     }
 });
