@@ -24,12 +24,12 @@ The objective of this assignment is to develop a weather forecast application us
 - Allow users to search for weather forecasts by **city name**. *(15 marks)* ✅
 - Allow users to search weather forecasts for **current location**. *(15 marks)* ✅
 - Add user interaction features such as buttons and input fields for selecting locations and viewing different weather data. *(10 marks)*
-- Implement dropdown menu for **recently searched cities**:
+- Implement dropdown menu for **recently searched cities**: ✅
   - Use **local or session storage** to store recently searched cities.
   - Initially, the dropdown should be empty.
   - Clicking on any city in the dropdown menu should update the weather data. *(20 marks)*
-- Implement event listeners to handle user interactions and update the UI accordingly. *(10 marks)*
-- Validate user inputs to prevent errors (e.g., invalid location, empty search queries). *(10 marks)*
+- Implement event listeners to handle user interactions and update the UI accordingly. *(10 marks)* ✅
+- Validate user inputs to prevent errors (e.g., invalid location, empty search queries). *(10 marks)* ✅
 - Fetch and display **location-specific weather forecasts**: ✅
   - Temperature
   - Humidity
